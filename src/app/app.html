@@ -1,0 +1,51 @@
+<h1 class="title">
+  <span>
+    Angular 20 example:
+  </span>
+  <code class="code">Linked Signal</code>
+  <span>
+    +
+  </span>
+  <code class="code">httpResource</code>
+  <span>
+    +
+  </span>
+  <code class="code">computed</code>
+</h1>
+<hr>
+<div>
+  <select name="field" style="margin-bottom: .5rem;" id="field" (change)="changeSortField($event)">
+    <option [value]="undefined" disabled selected>Sort by</option>
+    <option value="title">Title</option>
+    <option value="userId">userId</option>
+    <option value="id">id</option>
+  </select>
+</div>
+<div>
+  <button (click)="toggleSortDirection()">
+    Change sort direction
+  </button>
+  <div style="margin-top: .5rem; padding-left: .25rem;">
+    <span>
+      Direction value:
+    </span>
+    <strong>
+      {{ sortDirection() ?? 'undefined' }}
+    </strong>
+  </div>
+</div>
+
+<ul>
+  @if (albums.isLoading()) {
+  <li>Loading...</li>
+  }
+  @for (album of sortedAlbums(); track album.id) {
+  <li>
+    #{{ album.id }}: {{ album.title }} by user #{{ album.userId }}
+  </li>
+  }@empty {
+    <li>
+      No albums found.
+    </li>
+  }
+</ul>
